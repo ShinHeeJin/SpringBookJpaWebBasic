@@ -34,6 +34,22 @@ public class Order {
     private LocalDateTime orderDate; // JAVA8에서는 Hibernate Mapping 지원 -> 별도 애너테이션 사용 필요 x
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;
+    private OrderStatus status;
+
+    // == 연관관계 편의 메서드 == // 양방향 관계에서는 연관관계 메서드가 있으면 편리하다.
+    public void setMember(Member member) {
+        this.member = member;
+        member.getOrders().add(this);
+    }
+
+    public void addOrderItem(OrderItem orderItem) {
+        this.orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
 
 }
