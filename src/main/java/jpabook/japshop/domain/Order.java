@@ -27,10 +27,13 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
     private LocalDateTime orderDate; // JAVA8에서는 Hibernate Mapping 지원 -> 별도 애너테이션 사용 필요 x
 
+    @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
 }
