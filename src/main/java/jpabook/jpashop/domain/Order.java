@@ -20,14 +20,14 @@ public class Order {
 
     // Member & Order -> 1:M & M:1 양방향 관계
     // 연관관계의 주인 ( fk와 가까운 있는 엔티티를 주인 )
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
