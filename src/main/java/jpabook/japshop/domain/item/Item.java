@@ -1,9 +1,12 @@
 package jpabook.japshop.domain.item;
 
+import jpabook.japshop.domain.Category;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,5 +27,7 @@ public abstract class Item {
     private int price;
     private int stockQuantity;
 
+    @ManyToMany(mappedBy = "items") // 실무에서는 ManyToMany를 거의 사용하지 않는다. 관계 테이블에 추가 컬럼이 항상 들어가기 때문.
+    private List<Category> categories = new ArrayList<>();
 
 }
