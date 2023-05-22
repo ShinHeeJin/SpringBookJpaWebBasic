@@ -28,4 +28,12 @@ public class ItemService {
     public Item findOne(Long itemId) {
         return itemRepository.findOne(itemId);
     }
+
+    public void updateItem(Long itemId, String name, int price, int stockQuantity) {
+        // 영속성 컨텍스트에서 엔티티를 다시 조회한 후에 데이터를 수정한다.
+        Item item = itemRepository.findOne(itemId);
+        item.setName(name);
+        item.setPrice(price);
+        item.setStockQuantity(stockQuantity);
+    }
 }
